@@ -1,8 +1,6 @@
 package com.ray.citymanager.servlets;
 
 import com.ray.citymanager.models.DBManager;
-import com.ray.citymanager.models.IConnectionBehavior;
-import com.ray.citymanager.models.MySQLConnectionBehavior;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,20 +24,8 @@ public class ListAllCities extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StringBuilder sb = new StringBuilder("<html><body>");
-		
-		String uid = getServletContext().getInitParameter("dbuserid");
-		String pwd = getServletContext().getInitParameter("dbuserpwd");
-		String cat = getServletContext().getInitParameter("dbinitcat");
-		
-		// Option 1: Connect to MySQL
-		IConnectionBehavior icb = new MySQLConnectionBehavior(uid,pwd,cat);
-		
-		// Option 2: Connect to MS SQLServer
-		//IConnectionBehavior icb = new MssqlConnectionBehavior(uid,pwd,cat);
-		System.out.println(icb.getConnectionDetails());
-		System.out.println(icb.getConnectionURL());
-		
-		DBManager dbm = new DBManager(icb);
+
+		DBManager dbm = (DBManager)getServletContext().getAttribute("WorldDBManager");
 		
 		try {
 			if (!dbm.isConnected())

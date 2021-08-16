@@ -35,7 +35,7 @@ public class ListAllCities extends HttpServlet {
 		IConnectionBehavior icb = new MySQLConnectionBehavior(uid,pwd,cat);
 		
 		// Option 2: Connect to MS SQLServer
-		// IConnectionBehavior icb = new MssqlConnectionBehavior(uid,pwd,cat);
+		//IConnectionBehavior icb = new MssqlConnectionBehavior(uid,pwd,cat);
 		System.out.println(icb.getConnectionDetails());
 		System.out.println(icb.getConnectionURL());
 		
